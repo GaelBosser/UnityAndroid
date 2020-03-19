@@ -8,6 +8,7 @@ TagManager:
   - Cube
   - Sphere
   - Cylindre
+  - Reset
   layers:
   - Default
   - TransparentFX

@@ -1,17 +1,35 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TouchScript : MonoBehaviour
 {
+    private Button btnReset;
+    private GameObject buttonReset;
     private GameObject cube;
     private GameObject sphere;
     private GameObject cylindre;
     private Vector3 middlePosition;
     private Vector3 bigScale;
     private Vector3 minScale;
-    private bool elementIsFocused;
     private bool allowedInteractionWithObjects;
+
+    private bool elementIsFocused;
+    public bool ElementIsFocused
+    {
+        get => elementIsFocused;
+        set
+        {
+            elementIsFocused = value;
+            buttonReset.SetActive(value);
+        }
+    }
+
+    void Awake()
+    {
+        btnReset = GetComponent<Button>();
+    }
 
     private void Start()
     {
@@ -20,9 +38,14 @@ public class TouchScript : MonoBehaviour
         sphere = gameObjects.SingleOrDefault(g => g.name == "Sphere");
         cylindre = gameObjects.SingleOrDefault(g => g.name == "Cylinder");
 
-        if (cube != null && sphere != null && cylindre != null)
+        btnReset = GameObject.Find("BtnReset").GetComponent<Button>();
+        buttonReset = GameObject.Find("BtnReset");
+
+        if (cube != null && sphere != null && cylindre != null && btnReset != null)
         {
             allowedInteractionWithObjects = true;
+            btnReset.onClick.AddListener(ResetAllRotateElements);
+            buttonReset.SetActive(false);
         }
 
         middlePosition = new Vector3(497.88f, 1.97f, 41.11f);
@@ -60,9 +83,9 @@ public class TouchScript : MonoBehaviour
             cube.transform.localScale = bigScale;
             cube.transform.localPosition = middlePosition;
 
-            if (!elementIsFocused)
+            if (!ElementIsFocused)
             {
-                elementIsFocused = true;
+                ElementIsFocused = true;
                 cube.GetComponent<RotateScript>().CanRotate = false;
             }
         }
@@ -73,9 +96,9 @@ public class TouchScript : MonoBehaviour
 
             sphere.transform.localScale = new Vector3(1, 0.26f, 1);
 
-            if (!elementIsFocused)
+            if (!ElementIsFocused)
             {
-                elementIsFocused = true;
+                ElementIsFocused = true;
                 sphere.GetComponent<RotateScript>().CanRotate = false;
             }
         }
@@ -87,15 +110,11 @@ public class TouchScript : MonoBehaviour
             cylindre.transform.localScale = bigScale;
             cylindre.transform.localPosition = middlePosition;
 
-            if (!elementIsFocused)
+            if (!ElementIsFocused)
             {
-                elementIsFocused = true;
+                ElementIsFocused = true;
                 cylindre.GetComponent<RotateScript>().CanRotate = false;
             }
-        }
-        else
-        {
-            ResetAllRotateElements();
         }
     }
 
@@ -118,6 +137,6 @@ public class TouchScript : MonoBehaviour
         cylindre.transform.localPosition = new Vector3(498.93f, 1.97f, 41.11f);
         cylindre.GetComponent<RotateScript>().CanRotate = true;
 
-        elementIsFocused = false;
+        ElementIsFocused = false;
     }
 }
