@@ -26,11 +26,6 @@ public class TouchScript : MonoBehaviour
         }
     }
 
-    void Awake()
-    {
-        btnReset = GetComponent<Button>();
-    }
-
     private void Start()
     {
         List<GameObject> gameObjects = GameObject.FindGameObjectsWithTag("RotateElement").ToList();
@@ -38,7 +33,7 @@ public class TouchScript : MonoBehaviour
         sphere = gameObjects.SingleOrDefault(g => g.name == "Sphere");
         cylindre = gameObjects.SingleOrDefault(g => g.name == "Cylinder");
 
-        btnReset = GameObject.Find("BtnReset").GetComponent<Button>();
+        btnReset = GameObject.Find("BtnReset")?.GetComponent<Button>();
         buttonReset = GameObject.Find("BtnReset");
 
         if (cube != null && sphere != null && cylindre != null && btnReset != null)
