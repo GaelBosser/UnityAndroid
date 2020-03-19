@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 290399241}
   - component: {fileID: 290399240}
   - component: {fileID: 290399243}
+  - component: {fileID: 290399244}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: RotateElement
@@ -226,6 +227,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aeb0927e8dfe7ac408e8a707e58c7903, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &290399244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 290399238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0976091b2ff24346a4a94cff7b5234a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &416964075
@@ -614,6 +627,7 @@ GameObject:
   - component: {fileID: 1895679278}
   - component: {fileID: 1895679277}
   - component: {fileID: 1895679280}
+  - component: {fileID: 1895679281}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: RotateElement
@@ -705,5 +719,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aeb0927e8dfe7ac408e8a707e58c7903, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1895679281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1895679275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0976091b2ff24346a4a94cff7b5234a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
