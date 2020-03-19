@@ -6,8 +6,8 @@ public class SwipeScript : MonoBehaviour
 
     void OnMouseDrag()
 	{
-		float YaxisRotation = Input.GetAxis("Mouse Y") * rotationSpeed;
-		transform.Rotate(Vector3.right, YaxisRotation);
+		float XaxisRotation = Input.GetAxis("Mouse X") * rotationSpeed;
+		transform.Rotate(Vector3.right, XaxisRotation);
 	}
 }
 
