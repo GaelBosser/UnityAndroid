@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 290399240}
   - component: {fileID: 290399243}
   - component: {fileID: 290399244}
+  - component: {fileID: 290399245}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: RotateElement
@@ -239,6 +240,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e0976091b2ff24346a4a94cff7b5234a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &290399245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 290399238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b75d08582b43948f6ba8c4aaee926f0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &416964075
@@ -509,6 +522,7 @@ GameObject:
   - component: {fileID: 1585292202}
   - component: {fileID: 1585292205}
   - component: {fileID: 1585292206}
+  - component: {fileID: 1585292207}
   m_Layer: 0
   m_Name: Cube
   m_TagString: RotateElement
@@ -614,6 +628,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0976091b2ff24346a4a94cff7b5234a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1585292207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1585292200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b75d08582b43948f6ba8c4aaee926f0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1895679275
 GameObject:
   m_ObjectHideFlags: 0
@@ -628,6 +654,7 @@ GameObject:
   - component: {fileID: 1895679277}
   - component: {fileID: 1895679280}
   - component: {fileID: 1895679281}
+  - component: {fileID: 1895679282}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: RotateElement
@@ -731,5 +758,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e0976091b2ff24346a4a94cff7b5234a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1895679282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1895679275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b75d08582b43948f6ba8c4aaee926f0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
