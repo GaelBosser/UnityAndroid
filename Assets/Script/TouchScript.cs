@@ -33,7 +33,7 @@ public class TouchScript : MonoBehaviour
         sphere = gameObjects.SingleOrDefault(g => g.name == "Sphere");
         cylindre = gameObjects.SingleOrDefault(g => g.name == "Cylinder");
 
-        btnReset = GameObject.Find("BtnReset")?.GetComponent<Button>();
+        btnReset = GameObject.Find("BtnReset").GetComponent<Button>();
         buttonReset = GameObject.Find("BtnReset");
 
         if (cube != null && sphere != null && cylindre != null && btnReset != null)
@@ -124,12 +124,12 @@ public class TouchScript : MonoBehaviour
 
         cube.SetActive(true);
         cube.transform.localScale = minScale;
-        cube.transform.localPosition = new Vector3(496.83f, 1.97f, 41.11f);
+        cube.transform.localPosition = new Vector3(497.413f, 1.97f, 41.11f);
         cube.GetComponent<RotateScript>().CanRotate = true;
 
         cylindre.SetActive(true);
         cylindre.transform.localScale = minScale;
-        cylindre.transform.localPosition = new Vector3(498.93f, 1.97f, 41.11f);
+        cylindre.transform.localPosition = new Vector3(498.472f, 1.97f, 41.11f);
         cylindre.GetComponent<RotateScript>().CanRotate = true;
 
         ElementIsFocused = false;
