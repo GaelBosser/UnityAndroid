@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,13 +8,15 @@ public class TouchScript : MonoBehaviour
 {
     private Button btnReset;
     private GameObject buttonReset;
-    private GameObject cube;
-    private GameObject sphere;
-    private GameObject cylindre;
+
     private Vector3 middlePosition;
     private Vector3 bigScale;
-    private Vector3 minScale;
+    private Vector3 bigScaleSphere;
+
     private bool allowedInteractionWithObjects;
+
+    private readonly List<(GameObject gameObject, Vector3 scaleGameObject, Vector3 positionGameObject)> originalElements = new List<(GameObject, Vector3, Vector3)>();
+    private List<GameObject> rotateElements;
 
     private bool elementIsFocused;
     public bool ElementIsFocused
@@ -28,15 +31,14 @@ public class TouchScript : MonoBehaviour
 
     private void Start()
     {
-        List<GameObject> gameObjects = GameObject.FindGameObjectsWithTag("RotateElement").ToList();
-        cube = gameObjects.SingleOrDefault(g => g.name == "Cube");
-        sphere = gameObjects.SingleOrDefault(g => g.name == "Sphere");
-        cylindre = gameObjects.SingleOrDefault(g => g.name == "Cylinder");
+        rotateElements = GameObject.FindGameObjectsWithTag("RotateElement").ToList();
+
+        rotateElements.ForEach(element => originalElements.Add((element, element.transform.localScale, element.transform.localPosition)));
 
         btnReset = GameObject.Find("BtnReset").GetComponent<Button>();
         buttonReset = GameObject.Find("BtnReset");
 
-        if (cube != null && sphere != null && cylindre != null && btnReset != null)
+        if (btnReset != null && buttonReset != null)
         {
             allowedInteractionWithObjects = true;
             btnReset.onClick.AddListener(ResetAllRotateElements);
@@ -45,7 +47,7 @@ public class TouchScript : MonoBehaviour
 
         middlePosition = new Vector3(497.88f, 1.97f, 41.11f);
         bigScale = new Vector3(1, 1, 1);
-        minScale = new Vector3(0.25f, 0.25f, 0.25f);
+        bigScaleSphere = new Vector3(1, 0.26f, 1);
     }
 
     void Update()
@@ -70,45 +72,24 @@ public class TouchScript : MonoBehaviour
     /// <param name="hit">Element touché par l'utilisateur</param>
     private void ManageHitCollider(RaycastHit hit)
     {
-        if (hit.collider.gameObject.name == "Cube")
+        if(rotateElements.Any() && !ElementIsFocused)
         {
-            sphere.SetActive(false);
-            cylindre.SetActive(false);
+            bool isPresentInRotateElement = rotateElements.SingleOrDefault(element => element.Equals(hit.collider.gameObject));
 
-            cube.transform.localScale = bigScale;
-            cube.transform.localPosition = middlePosition;
-
-            if (!ElementIsFocused)
+            if (isPresentInRotateElement)
             {
+                IEnumerable<GameObject> otherRotateElements = rotateElements.Where(element => !element.Equals(hit.collider.gameObject));
+
+                foreach(GameObject rotateElement in otherRotateElements)
+                {
+                    rotateElement.SetActive(false);
+                }
+
+                hit.collider.gameObject.transform.localScale = hit.collider.gameObject.name.Equals("Sphere") ? bigScaleSphere : bigScale;
+                hit.collider.gameObject.transform.localPosition = middlePosition;
+
                 ElementIsFocused = true;
-                cube.GetComponent<RotateScript>().CanRotate = false;
-            }
-        }
-        else if (hit.collider.gameObject.name == "Sphere")
-        {
-            cube.SetActive(false);
-            cylindre.SetActive(false);
-
-            sphere.transform.localScale = new Vector3(1, 0.26f, 1);
-
-            if (!ElementIsFocused)
-            {
-                ElementIsFocused = true;
-                sphere.GetComponent<RotateScript>().CanRotate = false;
-            }
-        }
-        else if (hit.collider.gameObject.name == "Cylinder")
-        {
-            sphere.SetActive(false);
-            cube.SetActive(false);
-
-            cylindre.transform.localScale = bigScale;
-            cylindre.transform.localPosition = middlePosition;
-
-            if (!ElementIsFocused)
-            {
-                ElementIsFocused = true;
-                cylindre.GetComponent<RotateScript>().CanRotate = false;
+                hit.collider.gameObject.GetComponent<RotateScript>().CanRotate = false;
             }
         }
     }
@@ -118,19 +99,22 @@ public class TouchScript : MonoBehaviour
     /// </summary>
     private void ResetAllRotateElements()
     {
-        sphere.SetActive(true);
-        sphere.transform.localScale = new Vector3(0.25f, 0.07f, 0.25f);
-        sphere.GetComponent<RotateScript>().CanRotate = true;
+        foreach (GameObject rotateElement in rotateElements)
+        {
+            if (rotateElement.activeSelf)
+            {
+                (GameObject gameObject, Vector3 scaleGameObject, Vector3 positionGameObject) originalElement = originalElements.SingleOrDefault(element => element.gameObject.Equals(rotateElement));
 
-        cube.SetActive(true);
-        cube.transform.localScale = minScale;
-        cube.transform.localPosition = new Vector3(497.413f, 1.97f, 41.11f);
-        cube.GetComponent<RotateScript>().CanRotate = true;
+                rotateElement.transform.localScale = originalElement.scaleGameObject;
+                rotateElement.transform.localPosition = originalElement.positionGameObject;
+            }
+            else
+            {
+                rotateElement.SetActive(true);
+            }
 
-        cylindre.SetActive(true);
-        cylindre.transform.localScale = minScale;
-        cylindre.transform.localPosition = new Vector3(498.472f, 1.97f, 41.11f);
-        cylindre.GetComponent<RotateScript>().CanRotate = true;
+            rotateElement.GetComponent<RotateScript>().CanRotate = true;
+        }
 
         ElementIsFocused = false;
     }
